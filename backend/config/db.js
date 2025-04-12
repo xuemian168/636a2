@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import Product from "../models/Product.js";
+import Remark from '../models/Remark.js';
 
 const initializeData = async () => {
   try {
     await User.deleteMany({});
     await Product.deleteMany({});
+    await Remark.deleteMany({});
     // Create admin account
     const admin = await User.create({
       name: 'Admin',
@@ -39,6 +41,7 @@ const initializeData = async () => {
       price: 100,
       images: ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
       stock: 100,
+      provider: provider._id,
     });
     const product2 = await Product.create({
       name: 'Product 2',
@@ -46,6 +49,7 @@ const initializeData = async () => {
       price: 200,
       images: ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
       stock: 200,
+      provider: provider._id,
     });
     const product3 = await Product.create({
       name: 'Product 3',
@@ -53,12 +57,33 @@ const initializeData = async () => {
       price: 300,
       images: ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
       stock: 300,
+      provider: provider._id,
     });
+
+    const remark = await Remark.create({
+      product: product._id,
+      content: 'Remark 1',
+      score: 5,
+      user: seller._id,
+      images: ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
+    });
+
+    const remark2 = await Remark.create({
+      product: product2._id,
+      content: 'Remark 2',
+      score: 4,
+      user: seller._id,
+      images: ['https://picsum.photos/200/300', 'https://picsum.photos/200/300'],
+    });
+
+
 
     await product.save();
     await product2.save();
     await product3.save();
 
+    await remark.save();
+    await remark2.save();
     console.log('Database initialized with sample data');
   } catch (error) {
     console.error('Error initializing database:', error.message);

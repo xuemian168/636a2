@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for Task Manager App",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "mocha tests/**/*.test.js --timeout 10000",
     "start": "node server.js",
@@ -17,7 +18,7 @@
     "dotenv": "16.5.0",
     "express": "5.1.0",
     "jsonwebtoken": "9.0.2",
-    "mongoose": "8.13.2",
+    "mongoose": "7.6.3",
     "request": "^2.88.2"
   },
   "devDependencies": {
