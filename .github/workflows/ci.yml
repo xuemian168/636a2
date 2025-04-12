@@ -58,13 +58,11 @@ jobs:
             echo "PORT: $PORT"
             echo "NODE_ENV: $NODE_ENV"
             pm2 delete all || true
-            pm2 start server.js --name "product-remarking-backend" \
-              --watch \
-              --time \  
-              --log-date-format "YYYY-MM-DD HH:mm:ss.SSS" \
-              --output "/home/ubuntu/.pm2/logs/product-remarking-backend-out.log" \
-              --error "/home/ubuntu/.pm2/logs/product-remarking-backend-error.log" \
-              --env production
+            pm2 start server.js \
+              --name "product-remarking-backend" \
+              --time \
+              --env production \
+              -- --port 5001
 
             sleep 5
 
@@ -74,6 +72,9 @@ jobs:
             
             # 保存 PM2 配置
             pm2 save
+
+            # 显示日志
+            pm2 logs --lines 10
 
 
         - name: Configure Nginx
