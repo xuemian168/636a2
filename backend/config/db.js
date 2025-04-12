@@ -33,6 +33,10 @@ const initializeData = async () => {
       role: 'seller',
       phone: '0411108888',
     });
+    
+    await admin.save();
+    await provider.save();
+    await seller.save();
 
     // 初始化产品，图片来自网络
     const product = await Product.create({
