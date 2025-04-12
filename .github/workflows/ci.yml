@@ -54,8 +54,27 @@ jobs:
         - name: Start backend with PM2
           run: |
             cd backend
+            echo "Checking environment variables..."
+            echo "PORT: $PORT"
+            echo "NODE_ENV: $NODE_ENV"
             pm2 delete all || true
-            pm2 start server.js --name "hotel-backend"
+            pm2 start server.js --name "product-remarking-backend" \
+              --watch \
+              --time \  
+              --log-date-format "YYYY-MM-DD HH:mm:ss.SSS" \
+              --output "/home/ubuntu/.pm2/logs/product-remarking-backend-out.log" \
+              --error "/home/ubuntu/.pm2/logs/product-remarking-backend-error.log" \
+              --env production
+
+            sleep 5
+
+            pm2 list product-remarking-backend
+            # 检查日志文件权限
+            ls -l /home/ubuntu/.pm2/logs/
+            
+            # 保存 PM2 配置
+            pm2 save
+
 
         - name: Configure Nginx
           run: |
