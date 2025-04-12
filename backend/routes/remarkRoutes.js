@@ -4,8 +4,8 @@ import { createRemark, getAllRemarks, getRemarkById, updateRemark, deleteRemark 
 const router = express.Router();
 
 router.post('/', protect, isSeller, createRemark);
-router.get('/', getAllRemarks);
-router.get('/:id', getRemarkById);
+router.get('/', protect, getAllRemarks);
+router.get('/:id', protect, getRemarkById);
 router.put('/:id', protect, isSeller, updateRemark);
 router.delete('/:id', protect, isSeller, deleteRemark);
 
