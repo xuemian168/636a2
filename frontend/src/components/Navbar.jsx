@@ -23,6 +23,7 @@ const Navbar = () => {
                   <Link to="/dashboard" className="hover:text-blue-200">Dashboard</Link>
                   <Link to="/manage-products" className="hover:text-blue-200">Manage Products</Link>
                   <Link to="/remarks" className="hover:text-blue-200">All Remarks</Link>
+                  <Link to="/manage-users" className="hover:text-blue-200">Manage Users</Link>
                 </>
               )}
               {user.role === 'seller' && (
