@@ -5,15 +5,13 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "test": "mocha tests/**/*.test.js --timeout 10000",
+    "test": "mocha --experimental-modules tests/**/*.test.js --timeout 10000",
     "start": "node server.js",
     "dev": "nodemon server.js",
     "prod": "node server.js"
   },
   "dependencies": {
     "bcrypt": "5.1.1",
-    "chai": "5.2.0",
-    "chai-http": "5.1.1",
     "cors": "2.8.5",
     "dotenv": "16.5.0",
     "express": "5.1.0",
@@ -23,6 +21,7 @@
   },
   "devDependencies": {
     "chai": "5.2.0",
+    "chai-http": "5.1.1",
     "esm": "3.2.25",
     "mocha": "11.2.2",
     "mongodb-memory-server": "10.1.4",

@@ -1,7 +1,6 @@
-const chai = require('chai');
-const expect = chai.expect;
-const mongoose = require('mongoose');
-const { MongoMemoryServer } = require('mongodb-memory-server');
+import { expect } from 'chai';
+import mongoose from 'mongoose';
+import { MongoMemoryServer } from 'mongodb-memory-server';
 
 describe('MongoDB Connection Test', () => {
   let mongoServer;
