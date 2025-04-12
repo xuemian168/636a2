@@ -1,15 +1,14 @@
-
-const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 const generateToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+    return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '3d' });
 };
 
 const registerUser = async (req, res) => {
     try {
-        const { name, email, password, phone, id_type, id_number } = req.body;
+        const { name, email, password, phone, address, role } = req.body;
         
         // 检查用户是否已存在
         const userExists = await User.findOne({ email });
@@ -23,9 +22,8 @@ const registerUser = async (req, res) => {
             email,
             password,
             phone,
-            id_type,
-            id_number,
-            role: 'provider'
+            address,
+            role: role || 'seller',
         });
 
         // 返回用户信息，包含所有相关字段
@@ -34,8 +32,7 @@ const registerUser = async (req, res) => {
             name: user.name,
             email: user.email,
             phone: user.phone,
-            id_type: user.id_type,
-            id_number: user.id_number,
+            address: user.address,
             role: user.role,
             token: generateToken(user._id)
         });
@@ -79,6 +76,7 @@ const getProfile = async (req, res) => {
         email: user.email,
         phone: user.phone,
         address: user.address,
+        role: user.role,
       });
     } catch (error) {
       res.status(500).json({ message: 'Server error', error: error.message });
@@ -95,7 +93,8 @@ const updateUserProfile = async (req, res) => {
         user.email = email || user.email;
         user.phone = phone || user.phone;
         user.address = address || user.address;
-
+        // user.role = role || user.role; 不允许更新role
+        
         const updatedUser = await user.save();
         res.json({ id: updatedUser.id, name: updatedUser.name, email: updatedUser.email, phone: updatedUser.phone, address: updatedUser.address, token: generateToken(updatedUser.id) });
     } catch (error) {
@@ -103,4 +102,4 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-module.exports = { registerUser, loginUser, updateUserProfile, getProfile };
+export { registerUser, loginUser, getProfile, updateUserProfile };

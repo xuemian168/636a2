@@ -1,6 +1,5 @@
-
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 const protect = async (req, res, next) => {
     let token;
@@ -44,5 +43,5 @@ const isSeller = async (req, res, next) => {
         res.status(403).json({ message: 'Not authorized as seller' });
     }
 };
-
-module.exports = { protect, isAdmin, isProvider, isSeller };
+                
+export { protect, isAdmin, isProvider, isSeller };

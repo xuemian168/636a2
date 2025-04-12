@@ -1,7 +1,6 @@
 import express from 'express';
-import { protect, isSeller } from '../middleware/authMiddleware';
-import Remark from '../models/Remark';
-
+import { protect, isSeller } from '../middleware/authMiddleware.js';
+import { createRemark, getAllRemarks, getRemarkById, updateRemark, deleteRemark } from '../controllers/remarkController.js';
 const router = express.Router();
 
 router.post('/', protect, isSeller, createRemark);
