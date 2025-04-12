@@ -1,4 +1,4 @@
-# Hotel Booking System
+# Product Remarking System
 
 [![Node.js](https://img.shields.io/badge/Node.js-v22-green)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-v4-blue)](https://expressjs.com/)
