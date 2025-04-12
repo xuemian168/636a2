@@ -24,8 +24,8 @@ const Index = () => {
       <div className="relative h-[600px] bg-cover bg-center" style={{ backgroundImage: "url('/qut-hero.png')" }}>
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className="text-center text-white">
-            <h1 className="text-5xl font-bold mb-4">Welcome to QUT Hotel</h1>
-            <p className="text-xl mb-8">Experience Unparalleled Comfort and Elegance</p>
+            <h1 className="text-5xl font-bold mb-4">Welcome to  prodcut&review remarking system</h1>
+            <p className="text-xl mb-8">please choose your favourite</p>
             <button 
               onClick={() => navigate('/rooms')}
               className="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg hover:bg-blue-700 transition duration-300"
