@@ -84,6 +84,7 @@ const initializeData = async () => {
 
     await remark.save();
     await remark2.save();
+    
     console.log('Database initialized with sample data');
   } catch (error) {
     console.error('Error initializing database:', error.message);
