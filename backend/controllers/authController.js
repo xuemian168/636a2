@@ -25,7 +25,7 @@ const registerUser = async (req, res) => {
             phone,
             id_type,
             id_number,
-            roll: 'guest'
+            role: 'provider'
         });
 
         // 返回用户信息，包含所有相关字段
@@ -36,12 +36,12 @@ const registerUser = async (req, res) => {
             phone: user.phone,
             id_type: user.id_type,
             id_number: user.id_number,
-            roll: user.roll,
+            role: user.role,
             token: generateToken(user._id)
         });
     } catch (error) {
         res.status(500).json({ 
-            message: '注册失败', 
+            message: 'Register failed', 
             error: error.message 
         });
     }
@@ -57,7 +57,7 @@ const loginUser = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 token: generateToken(user.id),
-                roll: user.roll
+                role: user.role
             });
         } else {
             res.status(401).json({ message: 'Invalid email or password' });
@@ -77,7 +77,7 @@ const getProfile = async (req, res) => {
       res.status(200).json({
         name: user.name,
         email: user.email,
-        university: user.university,
+        phone: user.phone,
         address: user.address,
       });
     } catch (error) {
@@ -90,14 +90,14 @@ const updateUserProfile = async (req, res) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        const { name, email, university, address } = req.body;
+        const { name, email, phone, address } = req.body;
         user.name = name || user.name;
         user.email = email || user.email;
-        user.university = university || user.university;
+        user.phone = phone || user.phone;
         user.address = address || user.address;
 
         const updatedUser = await user.save();
-        res.json({ id: updatedUser.id, name: updatedUser.name, email: updatedUser.email, university: updatedUser.university, address: updatedUser.address, token: generateToken(updatedUser.id) });
+        res.json({ id: updatedUser.id, name: updatedUser.name, email: updatedUser.email, phone: updatedUser.phone, address: updatedUser.address, token: generateToken(updatedUser.id) });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

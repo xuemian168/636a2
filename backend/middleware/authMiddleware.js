@@ -22,11 +22,27 @@ const protect = async (req, res, next) => {
 };
 
 const isAdmin = async (req, res, next) => {
-    if (req.user && req.user.roll === 'admin') {
+    if (req.user && req.user.role === 'admin') {
         next();
     } else {
         res.status(403).json({ message: 'Not authorized as admin' });
     }
 };
 
-module.exports = { protect, isAdmin };
+const isProvider = async (req, res, next) => {
+    if (req.user && req.user.role === 'provider') {
+        next();
+    } else {
+        res.status(403).json({ message: 'Not authorized as provider' });
+    }
+};
+
+const isSeller = async (req, res, next) => {
+    if (req.user && req.user.role === 'seller') {
+        next();
+    } else {
+        res.status(403).json({ message: 'Not authorized as seller' });
+    }
+};
+
+module.exports = { protect, isAdmin, isProvider, isSeller };

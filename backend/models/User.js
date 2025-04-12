@@ -6,10 +6,10 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    roll: { type: String, enum: ['admin', 'guest'], default: 'guest' },
-    id_type: { type: String, enum: ['passport', 'driving_license'], required: true },
-    id_number: { type: String, required: true },
-    phone: { type: String, required: true }
+    role: { type: String, enum: ['admin', 'seller','provider'], default: 'provider' },
+    phone: { type: String, required: true },
+    address: { type: String, required: false },
+    status: { type: String, enum: ['active', 'inactive','banned'], default: 'active' },
 }, {
     timestamps: true
 });
