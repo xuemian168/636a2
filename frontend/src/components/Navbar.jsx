@@ -13,22 +13,28 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-800 text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">Luxury Hotel</Link>
+        <Link to="/" className="text-2xl font-bold">Product Remarking System</Link>
         <div className="flex items-center space-x-6">
-          <Link to="/rooms" className="hover:text-blue-200">Rooms</Link>
+          <Link to="/products" className="hover:text-blue-200">Products</Link>
           {user ? (
             <>
-              {user.roll === 'admin' && (
+              {user.role === 'admin' && (
                 <>
                   <Link to="/dashboard" className="hover:text-blue-200">Dashboard</Link>
-                  <Link to="/manage-rooms" className="hover:text-blue-200">Manage Rooms</Link>
-                  <Link to="/bookings" className="hover:text-blue-200">All Bookings</Link>
+                  <Link to="/manage-products" className="hover:text-blue-200">Manage Products</Link>
+                  <Link to="/remarks" className="hover:text-blue-200">All Remarks</Link>
                 </>
               )}
-              {user.roll === 'guest' && (
+              {user.role === 'seller' && (
                 <>
-                  <Link to="/my-bookings" className="hover:text-blue-200">My Bookings</Link>
-                  <Link to="/book-room" className="hover:text-blue-200">Book a Room</Link>
+                  <Link to="/my-remarks" className="hover:text-blue-200">My Remarks</Link>
+                  <Link to="/remark-product" className="hover:text-blue-200">Remark a Product</Link>
+                </>
+              )}
+              {user.role === 'provider' && (
+                <>
+                  <Link to="/my-products" className="hover:text-blue-200">My Products</Link>
+                  <Link to="/manage-products" className="hover:text-blue-200">Manage Products</Link>
                 </>
               )}
               <div className="flex items-center space-x-4">

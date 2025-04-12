@@ -9,7 +9,7 @@ const initializeData = async () => {
     await User.deleteMany({});
     await Product.deleteMany({});
     await Remark.deleteMany({});
-    // Create admin account
+    
     const admin = await User.create({
       name: 'Admin',
       email: 'admin@qut.com',
