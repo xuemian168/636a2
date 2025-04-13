@@ -10,7 +10,7 @@ const Products = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // 记录每个产品对应的评论表单数据（评论内容和评分）
+  // 用于记录每个产品对应的评论表单数据（评论内容和评分）
   const [reviewForms, setReviewForms] = useState({});
   // 用于控制每个产品是否显示评论表单
   const [showReviewForm, setShowReviewForm] = useState({});
@@ -23,6 +23,7 @@ const Products = () => {
   const fetchProducts = async () => {
     try {
       const response = await axiosInstance.get('/api/products');
+      // 假设返回的数据中，每个产品对象中包含 remarks 字段数组
       setProducts(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -31,7 +32,7 @@ const Products = () => {
     }
   };
 
-  // 切换显示评论表单状态
+  // 切换评论表单显示状态
   const handleToggleReviewForm = (productId) => {
     setShowReviewForm((prev) => ({
       ...prev,
@@ -39,7 +40,7 @@ const Products = () => {
     }));
   };
 
-  // 更新评论表单字段
+  // 更新评论表单字段的值
   const handleReviewChange = (productId, field, value) => {
     setReviewForms((prev) => ({
       ...prev,
@@ -47,7 +48,7 @@ const Products = () => {
     }));
   };
 
-  // 提交评论表单
+  // 提交评论数据
   const submitReview = async (productId) => {
     if (!user) {
       navigate('/login');
@@ -55,7 +56,7 @@ const Products = () => {
     }
     const reviewData = reviewForms[productId] || {};
     if (!reviewData.content || !reviewData.rating) {
-      alert('请输入评论内容和1-5之间的评分');
+      alert('请输入评论内容以及1到5之间的评分');
       return;
     }
     try {
@@ -65,18 +66,22 @@ const Products = () => {
           product: productId,
           content: reviewData.content,
           rating: reviewData.rating,
-          images: [] // 暂时不处理图片上传，可后续扩展
+          images: []
         },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
       if (response.data) {
         alert('评论提交成功！');
-        // 重置该产品的评论表单
+       
         setReviewForms((prev) => ({
           ...prev,
           [productId]: { content: '', rating: '' },
         }));
-        // 如有需要，可重新刷新产品或评论数据
+        setShowReviewForm((prev) => ({
+          ...prev,
+          [productId]: false,
+        }));
+        fetchProducts();
       }
     } catch (error) {
       alert(error.response?.data?.message || '评论提交失败，请稍后重试');
@@ -103,6 +108,33 @@ const Products = () => {
     }
   };
 
+  const handlePurchase = async (productId) => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    try {
+      const response = await axiosInstance.post(
+        `/api/products/${productId}/purchase`,
+        { productId },
+        { headers: { Authorization: `Bearer ${user.token}` } }
+      );
+      if (response.data.success) {
+        alert(`
+          Purchase Successful!
+          Order ID: ${response.data.data.orderId}
+          Product: ${response.data.data.productName}
+          Total Price: $${response.data.data.totalPrice}
+        `);
+        fetchProducts();
+      }
+    } catch (error) {
+      setError(
+        error.response?.data?.message || 'Purchase failed, please try again'
+      );
+    }
+  };
+
   if (isLoading) return <div className="text-center py-8">Loading...</div>;
   if (error) return <div className="text-center py-8 text-red-600">{error}</div>;
 
@@ -123,7 +155,6 @@ const Products = () => {
           </div>
         )}
 
-        {/* 产品网格 */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {products.map((product) => (
             <div key={product._id} className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -143,13 +174,34 @@ const Products = () => {
                 </div>
                 <p className="text-gray-600 mb-4">{product.description}</p>
                 <div className="space-y-2 mb-4">
-                  <p><span className="font-semibold">Price:</span> ${product.price}</p>
+                  <p>
+                    <span className="font-semibold">Price:</span> ${product.price}
+                  </p>
                   {product.stock !== undefined && (
-                    <p><span className="font-semibold">Stock:</span> {product.stock}</p>
+                    <p>
+                      <span className="font-semibold">Stock:</span> {product.stock}
+                    </p>
                   )}
                 </div>
 
-                {/* 如果用户是管理员，显示编辑和删除按钮 */}
+                {/* 显示产品现有的评论和评分 */}
+                <div className="mb-4">
+                  <h4 className="font-semibold mb-2">Reviews:</h4>
+                  {product.remarks && product.remarks.length > 0 ? (
+                    product.remarks.map((remark, index) => (
+                      <div key={index} className="border-b pb-1 mb-1">
+                        <p className="text-sm">
+                          <span className="font-bold">Rating:</span> {remark.rating}/5
+                        </p>
+                        <p className="text-sm">{remark.content}</p>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 text-sm">No reviews yet.</p>
+                  )}
+                </div>
+
+                {/* 如果用户为管理员，则显示编辑和删除按钮，否则显示评论/评分功能 */}
                 {user && user.role === 'admin' ? (
                   <div className="flex gap-2 mb-4">
                     <button 
@@ -166,7 +218,6 @@ const Products = () => {
                     </button>
                   </div>
                 ) : (
-                  // 否则显示评论/评分区域，允许用户评论和评分
                   <div className="mb-4">
                     <button 
                       onClick={() => handleToggleReviewForm(product._id)}
@@ -201,6 +252,15 @@ const Products = () => {
                     )}
                   </div>
                 )}
+
+                {/* 购买产品按钮 */}
+                <button 
+                  onClick={() => handlePurchase(product._id)}
+                  className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"
+                  disabled={product.stock === 0}
+                >
+                  Buy Now
+                </button>
               </div>
             </div>
           ))}
