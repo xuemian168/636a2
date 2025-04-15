@@ -112,4 +112,28 @@ const updateUserProfile = async (req, res) => {
     }
 };
 
-export { registerUser, loginUser, getProfile, updateUserProfile };
+
+const logoutUser = async (req, res) => {
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logged out successfully' });
+};
+
+const getAllUsers = async (req, res) => {
+    const users = await User.find();
+    res.status(200).json(users);
+};
+
+const deleteUser = async (req, res) => {
+    const { id } = req.params;
+    await User.findByIdAndDelete(id);
+    res.status(200).json({ message: 'User deleted successfully' });
+};
+
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { name, email, phone, address, role } = req.body;
+    await User.findByIdAndUpdate(id, { name, email, phone, address,role });
+    res.status(200).json({ message: 'User updated successfully' });
+};
+
+export { registerUser, loginUser, getProfile, updateUserProfile, logoutUser, getAllUsers, deleteUser, updateUser };
