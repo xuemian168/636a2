@@ -39,8 +39,12 @@ This is the backend service for the e-commerce platform. It provides RESTful API
 ### Authentication
 - `POST /api/auth/register` - Register a new user
 - `POST /api/auth/login` - Login user
+- `POST /api/auth/logout` - Logout User (protected)
 - `GET /api/auth/profile` - Get user profile (protected)
 - `PUT /api/auth/profile` - Update user profile (protected)
+- `GET /api/auth/users` - Get All Users (admin only)
+- `PUT /api/auth/users/:id` - Edit User Information (admin only)
+- `DELETE /api/auth/users/:id` - Delete User (admin only)
 
 ### Products
 - `POST /api/products` - Create a new product (provider only)
