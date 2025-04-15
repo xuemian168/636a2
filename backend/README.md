@@ -60,7 +60,7 @@ This is the backend service for the e-commerce platform. It provides RESTful API
 ## User Roles
 The system supports three user roles:
 - **Admin**: Full access to all resources
-- **Provider**: Can manage products
+- **Provider**: Can manage products and view all remarks belong their products
 - **Seller**: Can manage remarks
 
 ## Default Users
