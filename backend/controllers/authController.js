@@ -13,7 +13,17 @@ const registerUser = async (req, res) => {
         // 检查用户是否已存在
         const userExists = await User.findOne({ email });
         if (userExists) {
-            return res.status(400).json({ message: '用户已存在' });
+            return res.status(400).json({ message: 'User is already exists' });
+        }
+
+        // 检查密码是否符合要求
+        if (password.length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters long' });
+        }
+
+        // 不允许创建role为admin
+        if (role === 'admin') {
+            return res.status(400).json({ message: 'Admin role is not allowed to be created' });
         }
 
         // 创建新用户，包含所有必要字段
