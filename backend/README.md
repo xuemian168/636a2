@@ -48,6 +48,7 @@ This is the backend service for the e-commerce platform. It provides RESTful API
 - `GET /api/products/:id` - Get product by ID
 - `PUT /api/products/:id` - Update product (provider only)
 - `DELETE /api/products/:id` - Delete product (provider only)
+- `GET /api/products/:id/remarks` - Get Remark by Product ID (provider only)
 
 ### Remarks
 - `POST /api/remarks` - Create a new remark (seller only)
