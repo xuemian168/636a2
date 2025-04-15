@@ -11,4 +11,14 @@ const remarkSchema = new mongoose.Schema({
     updatedAt: { type: Date, default: Date.now },
 });
 
+// 添加评论后自动更新产品的平均评分
+remarkSchema.post('save', async function() {
+    await mongoose.model('Product').updateAverageRating(this.product);
+});
+
+// 删除评论后自动更新产品的平均评分
+remarkSchema.post('remove', async function() {
+    await mongoose.model('Product').updateAverageRating(this.product);
+});
+
 export default mongoose.model('Remark', remarkSchema);
