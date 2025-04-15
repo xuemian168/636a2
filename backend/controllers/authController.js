@@ -119,21 +119,33 @@ const logoutUser = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
-    const users = await User.find();
-    res.status(200).json(users);
+    try {
+        const users = await User.find();
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 const deleteUser = async (req, res) => {
-    const { id } = req.params;
-    await User.findByIdAndDelete(id);
-    res.status(200).json({ message: 'User deleted successfully' });
+    try {
+        const { id } = req.params;
+        await User.findByIdAndDelete(id);
+        res.status(200).json({ message: 'User deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 const updateUser = async (req, res) => {
-    const { id } = req.params;
-    const { name, email, phone, address, role } = req.body;
-    await User.findByIdAndUpdate(id, { name, email, phone, address,role });
-    res.status(200).json({ message: 'User updated successfully' });
+    try {
+        const { id } = req.params;
+        const { name, email, phone, address, role } = req.body;
+        await User.findByIdAndUpdate(id, { name, email, phone, address,role });
+        res.status(200).json({ message: 'User updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };
 
 export { registerUser, loginUser, getProfile, updateUserProfile, logoutUser, getAllUsers, deleteUser, updateUser };
