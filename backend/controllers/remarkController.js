@@ -49,6 +49,16 @@ export const getRemarkById = async (req, res) => {
     }
 };
 
+export const getRemarkByProductId = async (req, res) => {
+    try {
+        const remarks = await Remark.find({ product: req.params.id }).populate('user', 'name email').populate('product', 'name');
+        res.status(200).json(remarks);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+
 export const updateRemark = async (req, res) => {
     try {
         const { content, rating, images } = req.body;
