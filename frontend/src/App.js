@@ -20,7 +20,7 @@ function App() {
       <Navbar />
       <Routes>
         {/* home page route and Index components */}
-        <Route path="/" element={<Index />} />
+        <Route path="/index" element={<Index />} />
         {/* login page */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> 
