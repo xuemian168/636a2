@@ -20,6 +20,7 @@ const Navbar = () => {
           <Link to="/products" className="hover:text-blue-200">
             Products
           </Link>
+
           {user ? (
             <>
               {user.role === 'admin' && (
@@ -36,15 +37,9 @@ const Navbar = () => {
                   <Link to="/manage-users" className="hover:text-blue-200">
                     Manage Users
                   </Link>
-                  {/* 新增的 Add Products 按钮 */}
-                  <Link
-                    to="/add-product"
-                    className="bg-green-500 px-4 py-2 rounded hover:bg-green-600 transition duration-200"
-                  >
-                    Add Products
-                  </Link>
                 </>
               )}
+
               {user.role === 'seller' && (
                 <>
                   <Link to="/my-remarks" className="hover:text-blue-200">
@@ -55,6 +50,7 @@ const Navbar = () => {
                   </Link>
                 </>
               )}
+
               {user.role === 'provider' && (
                 <>
                   <Link to="/my-products" className="hover:text-blue-200">
@@ -65,6 +61,7 @@ const Navbar = () => {
                   </Link>
                 </>
               )}
+
               <div className="flex items-center space-x-4">
                 <Link to="/profile" className="hover:text-blue-200">
                   Profile

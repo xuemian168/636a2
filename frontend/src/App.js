@@ -26,19 +26,17 @@ function App() {
         <Route path="/register" element={<Register />} /> 
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/addproducts" element={<AddProducts/>}/>
+       
         <Route path="/dashboard"      element={<Dashboard />} />
         <Route path="/manage-products" element={<ManageProducts />} />
         <Route path="/remarks"        element={<AllRemarks />} />
         <Route path="/manage-users"   element={<ManageUsers />} />
-        <Route path="/add-product"    element={<AddProducts />} />
         {/* 仅 seller */}
         <Route path="/my-remarks"     element={<MyRemarks />} />
         <Route path="/remark-product" element={<RemarkProduct />} />
         {/* 仅 provider 可以是adnin*/}
         <Route path="/my-products"    element={<MyProducts />} />
       </Routes>
-
     </Router>
   );
 }
