@@ -5,7 +5,15 @@ import Login from './pages/Login';
 import Register from './pages/Register' ; 
 import Profile from './pages/Profile';
 import Products from './pages/Products';
-import AddProducts from './pages/AddProducts';
+import ManageProducts  from './pages/ManageProducts';
+import AllRemarks      from './pages/AllRemarks';
+import ManageUsers     from './pages/ManageUsers';
+
+import MyRemarks       from './pages/MyRemarks';
+import RemarkProduct   from './pages/RemarkProduct';
+import MyProducts      from './pages/MyProducts';
+import Dashboard       from './pages/Dashboard';
+
 function App() {
   return (
     <Router>
@@ -19,7 +27,18 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/products" element={<Products />} />
         <Route path="/addproducts" element={<AddProducts/>}/>
+        <Route path="/dashboard"      element={<Dashboard />} />
+        <Route path="/manage-products" element={<ManageProducts />} />
+        <Route path="/remarks"        element={<AllRemarks />} />
+        <Route path="/manage-users"   element={<ManageUsers />} />
+        <Route path="/add-product"    element={<AddProducts />} />
+        {/* 仅 seller */}
+        <Route path="/my-remarks"     element={<MyRemarks />} />
+        <Route path="/remark-product" element={<RemarkProduct />} />
+        {/* 仅 provider 可以是adnin*/}
+        <Route path="/my-products"    element={<MyProducts />} />
       </Routes>
+
     </Router>
   );
 }
