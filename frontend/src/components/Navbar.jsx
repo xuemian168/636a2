@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -13,16 +14,18 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-800 text-white p-4 shadow-lg">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/index" className="text-2xl font-bold">
+        <Link to="/" className="text-2xl font-bold">
           Product Remarking System
         </Link>
         <div className="flex items-center space-x-6">
+          {/* 所有人都能看到产品列表 */}
           <Link to="/products" className="hover:text-blue-200">
             Products
           </Link>
 
           {user ? (
             <>
+              {/* 只有 admin 能看到的菜单项 */}
               {user.role === 'admin' && (
                 <>
                   <Link to="/dashboard" className="hover:text-blue-200">
@@ -40,6 +43,7 @@ const Navbar = () => {
                 </>
               )}
 
+              {/* 只有 seller 能看到的菜单项 */}
               {user.role === 'seller' && (
                 <>
                   <Link to="/my-remarks" className="hover:text-blue-200">
@@ -51,17 +55,7 @@ const Navbar = () => {
                 </>
               )}
 
-              {user.role === 'provider' && (
-                <>
-                  <Link to="/my-products" className="hover:text-blue-200">
-                    My Products
-                  </Link>
-                  <Link to="/manage-products" className="hover:text-blue-200">
-                    Manage Products
-                  </Link>
-                </>
-              )}
-
+        
               <div className="flex items-center space-x-4">
                 <Link to="/profile" className="hover:text-blue-200">
                   Profile
@@ -75,6 +69,7 @@ const Navbar = () => {
               </div>
             </>
           ) : (
+            /* 未登录时显示 登录/注册 */
             <div className="flex items-center space-x-4">
               <Link to="/login" className="hover:text-blue-200">
                 Login

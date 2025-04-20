@@ -1,9 +1,10 @@
-import React from 'react';
+const Dashboard = () => {
+  return (
+    <div className="p-8">
+      <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
+      <p>Welcome, admin. Use the navigation to manage products, users, and remarks.</p>
+    </div>
+  );
+};
 
-const Dashboard = () => (
-  <div className="p-6">
-    <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
-    <p>Overview and statistics </p>
-  </div>
-);
 export default Dashboard;
