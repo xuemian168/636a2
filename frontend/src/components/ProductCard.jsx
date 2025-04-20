@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
         />
         <div className="absolute top-0 right-0 p-2 bg-blue-600 text-white rounded-full">
           <span className="text-xs font-bold">
-            {product.provider.name}
+            {product.admin.name}
           </span>
         </div>
       </div>
