@@ -36,7 +36,7 @@ const Login = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-800">Welcome to Hotel Booking</h2>
+          <h2 className="text-3xl font-bold text-gray-800">Welcome to product Booking</h2>
           <p className="text-gray-600 mt-2">Please sign in to your account</p>
         </div>
         <form onSubmit={handleSubmit} className="bg-white p-8 shadow-lg rounded-lg">
