@@ -1,4 +1,4 @@
-//管理员查看所有评论，对应 "/remarks"。
+
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
@@ -6,7 +6,7 @@ import axiosInstance from '../axiosConfig';
 const AllRemarks = () => {
   const [remarks, setRemarks] = useState([]);
   const { user } = useAuth();
-
+//管理员查看所有评论，对应 "/remarks"
   useEffect(() => {
     axiosInstance.get('/api/remarks', { headers: { Authorization: `Bearer ${user.token}` } })
       .then(res => setRemarks(res.data));

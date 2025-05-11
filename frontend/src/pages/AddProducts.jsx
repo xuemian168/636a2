@@ -4,7 +4,7 @@ import axiosInstance from '../axiosConfig';
 import { useAuth } from '../context/AuthContext';
 
 const AddProduct = () => {
-  //：name, description, price, stock, images
+ 
   const [form, setForm] = useState({
     name: '',
     description: '',
@@ -27,7 +27,7 @@ const AddProduct = () => {
     }
   };
 
-  // 提交产品
+     // 提交产品
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -42,7 +42,7 @@ const AddProduct = () => {
         },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
-      // 成功后跳回 管理产品 列表
+         // 成功后跳回 管理产品 列表
       navigate('/manage-products');
     } catch (err) {
       setError(err.response?.data?.message || 'Create failed');
@@ -84,7 +84,7 @@ const AddProduct = () => {
           className="w-full p-2 border rounded"
           required
         />
-        {/* 库存 */}
+           {/* 库存 */}
         <input
           name="stock"
           type="number"
@@ -94,7 +94,7 @@ const AddProduct = () => {
           className="w-full p-2 border rounded"
           required
         />
-        {/* 图片 */}
+           {/* 图片 */}
         <input
           name="images"
           value={form.images.join(', ')}

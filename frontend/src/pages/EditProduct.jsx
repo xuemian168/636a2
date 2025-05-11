@@ -4,7 +4,7 @@ import axiosInstance from '../axiosConfig';
 import { useAuth } from '../context/AuthContext';
 
 const EditProduct = () => {
-  const { id } = useParams();      // 从 URL 抓产品 ID
+  const { id } = useParams();        // 从 URL 抓产品 ID
   const navigate = useNavigate();
   const { user } = useAuth();
   const [form, setForm] = useState({
