@@ -15,6 +15,7 @@ const RemarkProduct = () => {
   useEffect(() => {
     // 只有 seller 能访问
     if (user?.role !== 'seller') {
+      console.log('user', user);
       setError('Not authorized');
       return;
     }

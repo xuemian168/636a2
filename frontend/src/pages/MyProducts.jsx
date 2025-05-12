@@ -12,6 +12,7 @@ const MyProducts = () => {
   useEffect(() => {
     // 只有 admin 能进 —— 
     if (!user || user.role !== 'admin') {
+      console.log('user', user);
       setError('Not authorized');
       return;
     }
