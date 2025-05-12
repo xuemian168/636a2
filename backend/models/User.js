@@ -20,3 +20,6 @@ userSchema.pre('save', async function (next) {
 });
 
 export default mongoose.model('User', userSchema);
+//Here, ModelClass is a subclass inherited from Mongoose.Model
+// User is a "subclass" that inherits all the behaviors of the Model
+//Inheritance chain: User <- Model 

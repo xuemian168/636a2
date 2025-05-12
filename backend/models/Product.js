@@ -32,3 +32,5 @@ productSchema.statics.updateAverageRating = async function (productId) {
 };
 
 export default mongoose.model('Product', productSchema);
+//mongoose.model inherited from Mongoose.Model
+//Inheritance chain: Product <- Model 

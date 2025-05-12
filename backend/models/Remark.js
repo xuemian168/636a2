@@ -31,3 +31,5 @@ remarkSchema.post('remove', async function () {
 });
 
 export default mongoose.model('Remark', remarkSchema);
+//mongoose.model inherited from Mongoose.Model
+////Inheritance chain: Remark <- Model 
