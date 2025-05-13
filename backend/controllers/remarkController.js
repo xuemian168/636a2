@@ -1,4 +1,16 @@
 import Remark from '../models/Remark.js';
+import { BaseController } from './BaseController.js';
+
+class RemarkController extends BaseController {
+    constructor() {
+        super(Remark);
+    }
+}
+
+const remarkController = new RemarkController();
+
+export const getAllRemarks = (...args) => remarkController.getAll(...args);
+export const getRemarkById = (...args) => remarkController.getById(...args);
 
 export const createRemark = async (req, res) => {
     try {
@@ -18,37 +30,6 @@ export const createRemark = async (req, res) => {
     }
 };
 
-export const getAllRemarks = async (req, res) => {
-    if (req.user.role == 'admin') {
-        try {
-            const remarks = await Remark.find().populate('user', 'name email').populate('product', 'name');
-            res.status(200).json(remarks);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    } else {
-        // 如果用户不是管理员，只返回与其相关的评论
-        try {
-            const remarks = await Remark.find({ user: req.user._id }).populate('user', 'name email').populate('product', 'name');
-            res.status(200).json(remarks);
-        } catch (error) {
-            res.status(500).json({ message: error.message });
-        }
-    }
-};
-
-export const getRemarkById = async (req, res) => {
-    try {
-        const remark = await Remark.findById(req.params.id).populate('user', 'name email').populate('product', 'name');
-        if (!remark) {
-            return res.status(404).json({ message: 'Remark not found' });
-        }
-        res.status(200).json(remark);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
 export const getRemarkByProductId = async (req, res) => {
     try {
         const remarks = await Remark.find({ product: req.params.id }).populate('user', 'name email').populate('product', 'name');
@@ -57,7 +38,6 @@ export const getRemarkByProductId = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-
 
 export const updateRemark = async (req, res) => {
     try {
