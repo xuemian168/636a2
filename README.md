@@ -11,7 +11,7 @@
 - Huixue Han
 
 ## Project Description
-A modern hotel booking system that enables users to seamlessly book and manage hotel room reservations.
+product review user manage system
 
 ## Tech Stack
 
