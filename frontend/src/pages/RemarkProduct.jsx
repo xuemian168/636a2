@@ -13,12 +13,12 @@ const RemarkProduct = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    // 只有 seller 能访问
-    if (user?.role !== 'seller' || user?.role !== 'admin') {
-      console.log('user', user);
-      setError('Not authorized');
-      return;
-    }
+    // // 只有 seller 能访问
+    // if (user?.role !== 'seller' || user?.role !== 'admin') {
+    //   console.log('user', user);
+    //   setError('Not authorized');
+    //   return;
+    // }
     axiosInstance
       .get('/api/products', {
         headers: { Authorization: `Bearer ${user.token}` }
