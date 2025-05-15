@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <Routes>
+      <Routes basename="/api/">
         {/* home page route and Index components */}
         <Route path="/index" element={<Index />} />
         {/* login page */}
