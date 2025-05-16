@@ -11,7 +11,7 @@
         const navigate = useNavigate();
       
         useEffect(() => {
-          // 管理员接口，包含 provider info admin就是provider
+         // 管理员接口，包含 provider info admin就是provider
           axiosInstance.get('/api/products', { headers: { Authorization: `Bearer ${user.token}` } })
             .then(res => setProducts(res.data));
         }, [user]);

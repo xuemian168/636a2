@@ -13,12 +13,6 @@ const RemarkProduct = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    // // 只有 seller 能访问
-    // if (user?.role !== 'seller' || user?.role !== 'admin') {
-    //   console.log('user', user);
-    //   setError('Not authorized');
-    //   return;
-    // }
     axiosInstance
       .get('/api/products', {
         headers: { Authorization: `Bearer ${user.token}` }
@@ -26,7 +20,7 @@ const RemarkProduct = () => {
       .then(res => setProducts(res.data))
       .catch(err => {
         console.error('Failed to fetch products for remarking', err);
-        setError('加载产品列表失败');
+        setError('Failed to load the product list');
       });
   }, [user]);
 
@@ -37,7 +31,7 @@ const RemarkProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.productId || !form.content || !form.rating) {
-      alert('请选择产品并填写评论内容和评分');
+      alert('Please select the product and fill in the review content and rating');
       return;
     }
     try {
@@ -53,12 +47,12 @@ const RemarkProduct = () => {
           headers: { Authorization: `Bearer ${user.token}` }
         }
       );
-      alert('评论提交成功！');
+      alert('review submit sucessuflly！');
       // 重置表单
       setForm({ productId: '', content: '', rating: 5 });
     } catch (err) {
       console.error('Remark submit error', err);
-      alert(err.response?.data?.message || '提交失败');
+      alert(err.response?.data?.message || 'submit fail');
     }
   };
 

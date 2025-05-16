@@ -3,7 +3,7 @@ import axiosInstance from '../axiosConfig';
 import { useNavigate } from 'react-router-dom';
 
 const Products = () => {
-  // 公共产品
+ 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
