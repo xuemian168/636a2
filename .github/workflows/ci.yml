@@ -58,23 +58,23 @@ jobs:
             echo "PORT: $PORT"
             echo "NODE_ENV: $NODE_ENV"
             pm2 delete all || true
-            pm2 start server.js \
-              --name "product-remarking-backend" \
-              --time \
-              --env production \
-              -- --port 5002
+            # pm2 start server.js \
+            #   --name "product-remarking-backend" \
+            #   --time \
+            #   --env production \
+            #   -- --port 5002
 
-            sleep 5
+            # sleep 5
 
-            pm2 list product-remarking-backend
-            # 检查日志文件权限
-            ls -l /home/ubuntu/.pm2/logs/
+            # pm2 list product-remarking-backend
+            # # 检查日志文件权限
+            # ls -l /home/ubuntu/.pm2/logs/
             
-            # 保存 PM2 配置
-            pm2 save
+            # # 保存 PM2 配置
+            # pm2 save
 
-            # 显示日志
-            pm2 logs --lines 10
+            # # 显示日志
+            # pm2 logs --lines 10
 
 
         # - name: Configure Nginx
