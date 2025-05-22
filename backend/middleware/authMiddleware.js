@@ -41,5 +41,21 @@ const isSeller = async (req, res, next) => {
         res.status(403).json({ message: 'Not authorized as seller' });
     }
 };
+
+const isSellerorAdmin = async (req, res, next) => {
+    if (req.user && (req.user.role === 'seller' || req.user.role === 'admin')) {
+        next();
+    } else {
+        res.status(403).json({ message: 'Not authorized as seller or admin' });
+    }
+}
+
+const isProviderorAdmin = async (req, res, next) => {   
+    if (req.user && (req.user.role === 'provider' || req.user.role === 'admin')) {
+        next();
+    } else {
+        res.status(403).json({ message: 'Not authorized as provider or admin' });
+    }
+}
                 
 export { protect, isAdmin, isProvider, isSeller };
