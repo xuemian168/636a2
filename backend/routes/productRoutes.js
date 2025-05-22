@@ -6,7 +6,7 @@ import { getRemarkByProductId } from '../controllers/remarkController.js';
 const router = express.Router();
 
 router.post('/', protect, isAdmin, createProduct);
-router.get('/', protect, getAllProducts);
+router.get('/', getAllProducts);
 router.get('/:id', protect, getProductById);
 router.put('/:id', protect, isAdmin, updateProduct);
 router.delete('/:id', protect, isAdmin, deleteProduct);
