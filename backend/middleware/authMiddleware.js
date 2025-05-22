@@ -58,4 +58,4 @@ const isProviderorAdmin = async (req, res, next) => {
     }
 }
                 
-export { protect, isAdmin, isProvider, isSeller };
+export { protect, isAdmin, isProvider, isSeller, isSellerorAdmin, isProviderorAdmin };
